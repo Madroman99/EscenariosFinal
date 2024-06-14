@@ -1,0 +1,41 @@
+# Cargar las librerías
+library(rvest)
+library(dplyr)
+library(stringr)
+library(tidyverse)
+# Leer la página web
+url <- 'https://es.wikipedia.org/wiki/Econom%C3%ADa_de_Guatemala'
+webpage <- read_html(url)
+# Limpiar el primer párrafo
+first_paragraph_clean <- str_trim(first_paragraph)
+# Limpiar el primer párrafo
+first_paragraph_clean <- str_trim(first_paragraph)
+# Extraer el primer párrafo
+first_paragraph <- webpage %>%
+html_node('p') %>%
+html_text()
+# Mostrar el primer párrafo
+print(first_paragraph)
+# Extraer la tabla de información (infobox)
+infobox <- webpage %>%
+html_node('.infobox') %>%
+html_table()
+# Mostrar la tabla de información
+print(infobox)
+# Limpiar el primer párrafo
+first_paragraph_clean <- str_trim(first_paragraph)
+# Mostrar el párrafo limpio
+print(first_paragraph_clean)
+# Limpiar y estructurar la tabla de información
+infobox_clean <- infobox %>%
+rename(Attribute = 1, Value = 2) %>%
+filter(!is.na(Attribute))
+# Mostrar la tabla de información limpia
+print(infobox_clean)
+# Agregar una columna ficticia de datos numéricos para el análisis
+set.seed(123) # Para reproducibilidad
+infobox_clean$NumericValue <- sample(1:100, nrow(infobox_clean), replace
+= TRUE)
+# Mostrar la tabla con la nueva columna
+print(infobox_clean)
+savehistory("C:/Users/Telmy/Downloads/Limpieza y transformación Telma Mijangos.Rhistory")
